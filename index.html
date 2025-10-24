@@ -532,8 +532,7 @@
                 <li><a href="#advantages">Преимущества</a></li>
                 <li><a href="#contacts">Контакты</a></li>
             </ul>
-        </div>
-    </header>
+           </nav> </header>
 
     <!-- Герой секция -->
     <section class="hero">
@@ -691,7 +690,7 @@
                             <strong>Адрес:</strong>
                             <p>Узбекистан, г. Ташкент, ул. Чарх-Камолон, дом 1</p>
                         </div>
-                    </div>
+                        </div>
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-phone-alt"></i>
@@ -772,8 +771,7 @@
                     <p>г. Ташкент, ул. Чарх-Камолон, дом 1</p>
                 </div>
             </div>
-            <div>
-                  </a>
+                </a>
                 </div>
             </div>
         </div>
@@ -847,17 +845,17 @@
   
   // Обработка отправки форм (ИСПРАВЛЕННАЯ ВЕРСИЯ)
   function handleFormSubmit(formId) {
-    const form = document.getElementById(formId);
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerHTML;
-    
-    // Получаем значения полей
-    const formData = {
-      name: form.querySelector('[name="name"]').value,
-      phone: form.querySelector('[name="phone"]').value,
-      email: form.querySelector('[name="email"]').value,
-      message: form.querySelector('[name="message"]').value
-    };
+    const form = document.getElementById(formId);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    
+    // Получаем значения полей
+    const formData = {
+      name: form.querySelector('[name="name"]').value,
+      phone: form.querySelector('[name="phone"]').value,
+      email: form.querySelector('[name="email"]').value,
+      comment: form.querySelector('[name="comment"]').value 
+    };
     
     // Показать состояние загрузки
     submitButton.innerHTML = 'Отправка...';
@@ -901,4 +899,3 @@
     });
   });
 </script>
-
