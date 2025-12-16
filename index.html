@@ -1,9 +1,10 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caravan Railway - Железнодорожные перевозки грузов по Узбекистану и СНГ</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚂</text></svg>">
     <style>
         :root {
             --primary: #2c3e50;
@@ -173,7 +174,7 @@
         
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(#5c6d8d);
+            color: #5c6d8d;
             position: relative;
             display: inline-block;
             padding-bottom: 15px;
@@ -242,7 +243,7 @@
             color: var(--dark);
         }
         
-/* Услуги */
+        /* Услуги */
         .services {
             background: #f9f9f9;
         }
@@ -292,7 +293,6 @@
             line-height: 1.6;
         }
 
-        
         /* Преимущества */
         .advantages {
             background: white;
@@ -327,7 +327,6 @@
             color: var(--dark);
         }
         
-                
         /* Контакты */
         .contacts {
             background: var(--dark);
@@ -390,14 +389,15 @@
             font-size: 1.2rem;
             color: white;
             transition: 0.3s;
+            text-decoration: none !important;
         }
         
         .social-icon:hover {
             background: var(--accent);
             transform: translateY(-5px);
+            text-decoration: none !important;
         }
         
-            
         .form-group {
             margin-bottom: 20px;
         }
@@ -436,6 +436,7 @@
             color: white;
             margin-bottom: 15px;
             display: block;
+            text-decoration: none;
         }
         
         .footer-logo span {
@@ -458,6 +459,7 @@
         
         .footer-links a:hover {
             color: var(--accent);
+            text-decoration: none;
         }
         
         .copyright {
@@ -497,16 +499,51 @@
             color: #777;
         }
         
-        /* Адаптивность */
+        /* Мобильное меню */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.98);
+            padding: 20px;
+            z-index: 1000;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Адаптивность для планшетов (992px и меньше) */
         @media (max-width: 992px) {
             nav ul {
                 display: none;
             }
             
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .hero h1 {
-                font-size: 3.5rem;
-                margin-bottom: 20px;
-                text-transform: uppercase;
+                font-size: 2.5rem;
             }
             
             .hero p {
@@ -515,6 +552,203 @@
             
             .about-content {
                 flex-direction: column;
+            }
+            
+            section {
+                padding: 60px 5%;
+            }
+            
+            .section-title {
+                margin-bottom: 40px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .stat-item {
+                padding: 15px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .btn-large {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .services-grid,
+            .advantages-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        /* Адаптивность для мобильных (768px и меньше) */
+        @media (max-width: 768px) {
+            .hero {
+                height: 80vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-bg {
+                animation: zoomEffectMobile 20s infinite alternate;
+            }
+            
+            @keyframes zoomEffectMobile {
+                0% { transform: scale(1); }
+                100% { transform: scale(1.05); }
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid,
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .service-card,
+            .advantage-card {
+                padding: 20px;
+            }
+            
+            .service-icon {
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .advantage-icon {
+                min-width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .contacts-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .footer-links {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .form-control {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            textarea.form-control {
+                min-height: 120px;
+            }
+            
+            .modal-content {
+                padding: 25px;
+                width: 95%;
+            }
+        }
+        
+        /* Адаптивность для маленьких мобильных (480px и меньше) */
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 3%;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 50px 3%;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .about-text h3 {
+                font-size: 1.5rem;
+            }
+            
+            .service-content h3,
+            .advantage-text h3 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info h3 {
+                font-size: 1.5rem;
+            }
+            
+            .mobile-menu a {
+                padding: 12px;
+            }
+            
+            .btn-large {
+                padding: 10px 25px;
+            }
+        }
+        
+        /* Адаптивность для очень маленьких экранов (360px и меньше) */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+            
+            .hero p {
+                font-size: 0.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .btn-large {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .service-content,
+            .advantage-text {
+                padding: 15px 0;
             }
         }
     </style>
@@ -532,11 +766,21 @@
                 <li><a href="#advantages">Преимущества</a></li>
                 <li><a href="#contacts">Контакты</a></li>
             </ul>
-           </nav> </header>
+        </nav>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-menu">
+            <a href="#about">О компании</a>
+            <a href="#services">Услуги</a>
+            <a href="#advantages">Преимущества</a>
+            <a href="#contacts">Контакты</a>
+        </div>
+    </header>
 
     <!-- Герой секция -->
     <section class="hero">
-        <img src="https://images.pexels.com/photos/31285311/pexels-photo-31285311.jpeg?_gl=1*101xg5b*_ga*MTcyMzIxNzY0Ni4xNzUwOTI3NDE2*_ga_8JE65Q40S6*czE3NTA5Mjc0MTYkbzEkZzEkdDE3NTA5MjgwNzYkajQwJGwwJGgw" alt="Грузовой поезд" class="hero-bg">
+        <img src="https://images.pexels.com/photos/31285311/pexels-photo-31285311.jpeg?_gl=1*101xg5b*_ga*MTcyMzIxNzY0Ni4xNzUwOTI3NDE2*_ga_8JE65Q40S6*czE3NTA5Mjc0MTYkbzEkZzEkdDE3NTA5MjgwNzYkajQwJGwwJGhw" alt="Грузовой поезд" class="hero-bg">
         <div class="hero-content">
             <h1>Железнодорожные перевозки по Узбекистану и СНГ</h1>
             <p>Полный комплекс транспортно-экспедиторских услуг по железнодорожным перевозкам</p>
@@ -606,7 +850,6 @@
                     <p>Полное сопровождение груза на всем пути следования, включая таможенное оформление и контроль.</p>
                 </div>
             </div>
-                            
         </div>
     </section>
 
@@ -690,7 +933,7 @@
                             <strong>Адрес:</strong>
                             <p>Узбекистан, г. Ташкент, ул. Чарх-Камолон, дом 1</p>
                         </div>
-                        </div>
+                    </div>
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-phone-alt"></i>
@@ -713,36 +956,35 @@
                 
                 <h4>Мы в социальных сетях:</h4>
                 <div class="social-links">
-                    <a href="https://t.me/caravanrailway" class="social-icon">
+                    <a href="https://t.me/caravanrailway" class="social-icon" target="_blank" rel="noopener">
                         <i class="fab fa-telegram"></i>
                     </a>
-                    <a href="https://wa.me/+998993299078" class="social-icon">
+                    <a href="https://wa.me/+998993299078" class="social-icon" target="_blank" rel="noopener">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                     <a href="#" class="social-icon">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    
                 </div>
             </div>
             
             <div class="contact-form">
                 <h3>Отправить запрос</h3>
                 <form id="feedback-form">
-    <div class="form-group">
-        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
-    </div>
-    <div class="form-group">
-        <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
-    </div>
-    <div class="form-group">
-        <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
-    </div>
-    <div class="form-group">
-        <textarea name="message" class="form-control" placeholder="Сообщение" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-block">Отправить запрос</button>
-</form>
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" placeholder="Сообщение" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-block">Отправить запрос</button>
+                </form>
             </div>
         </div>
     </section>
@@ -771,7 +1013,18 @@
                     <p>г. Ташкент, ул. Чарх-Камолон, дом 1</p>
                 </div>
             </div>
-                </a>
+            <div>
+                <h4 class="footer-title">Социальные сети</h4>
+                <div class="social-links">
+                    <a href="https://t.me/caravanrailway" class="social-icon" target="_blank" rel="noopener">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://wa.me/+998993299078" class="social-icon" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -786,116 +1039,144 @@
             <span class="close-modal">&times;</span>
             <h2>Запрос на консультацию</h2>
             <form id="modal-form">
-                <form id="feedback-form">
-    <div class="form-group">
-        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
-    </div>
-    <div class="form-group">
-        <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
-    </div>
-    <div class="form-group">
-        <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
-    </div>
-    <div class="form-group">
-        <textarea name="message" class="form-control" placeholder="Сообщение" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-block">Отправить запрос</button>
-</form>
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" class="form-control" placeholder="Сообщение" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-block">Отправить запрос</button>
+            </form>
         </div>
     </div>
 
- <script>
-  // Открытие/закрытие модального окна
-  const modal = document.getElementById('contact-modal');
-  const contactButtons = document.querySelectorAll('.contact-btn');
-  const closeModal = document.querySelector('.close-modal');
-  
-  contactButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
-  });
-  
-  closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  });
-  
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-  });
-  
-  // Плавная прокрутка
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 80,
-          behavior: 'smooth'
+    <script>
+        // Открытие/закрытие модального окна
+        const modal = document.getElementById('contact-modal');
+        const contactButtons = document.querySelectorAll('.contact-btn');
+        const closeModal = document.querySelector('.close-modal');
+        
+        contactButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
         });
-      }
-    });
-  });
-  
-  // Обработка отправки форм (ИСПРАВЛЕННАЯ ВЕРСИЯ)
-  function handleFormSubmit(formId) {
-    const form = document.getElementById(formId);
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerHTML;
-    
-    // Получаем значения полей
-    const formData = {
-      name: form.querySelector('[name="name"]').value,
-      phone: form.querySelector('[name="phone"]').value,
-      email: form.querySelector('[name="email"]').value,
-      comment: form.querySelector('[name="comment"]').value 
-    };
-    
-    // Показать состояние загрузки
-    submitButton.innerHTML = 'Отправка...';
-    submitButton.disabled = true;
-    
-    // Вызов серверной функции
-    google.script.run
-      .withSuccessHandler((response) => {
-        if (response.status === "success") {
-          alert(response.message);
-          form.reset();
-          if (formId === 'modal-form') {
+        
+        closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-          }
-        } else {
-          alert('Ошибка: ' + response.message);
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Мобильное меню
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
-        submitButton.innerHTML = originalButtonText;
-        submitButton.disabled = false;
-      })
-      .withFailureHandler((error) => {
-        console.error('Ошибка отправки:', error);
-        alert('Ошибка отправки. Пожалуйста, попробуйте снова или свяжитесь по телефону.');
-        submitButton.innerHTML = originalButtonText;
-        submitButton.disabled = false;
-      })
-      .handleFormSubmit(formData);
-  }
-  
-  // Инициализация обработчиков форм
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('feedback-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      handleFormSubmit('feedback-form');
-    });
-    
-    document.getElementById('modal-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      handleFormSubmit('modal-form');
-    });
-  });
-</script>
+        
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Обработка отправки форм
+        function handleFormSubmit(formId) {
+            const form = document.getElementById(formId);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            
+            // Получаем значения полей
+            const formData = {
+                name: form.querySelector('[name="name"]').value,
+                phone: form.querySelector('[name="phone"]').value,
+                email: form.querySelector('[name="email"]').value,
+                message: form.querySelector('[name="message"]').value
+            };
+            
+            // Показать состояние загрузки
+            submitButton.innerHTML = 'Отправка...';
+            submitButton.disabled = true;
+            
+            // Вызов серверной функции Google Apps Script
+            google.script.run
+                .withSuccessHandler((response) => {
+                    if (response.status === "success") {
+                        alert(response.message);
+                        form.reset();
+                        if (formId === 'modal-form') {
+                            modal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        }
+                    } else {
+                        alert('Ошибка: ' + response.message);
+                    }
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                })
+                .withFailureHandler((error) => {
+                    console.error('Ошибка отправки:', error);
+                    alert('Ошибка отправки. Пожалуйста, попробуйте снова или свяжитесь по телефону.');
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                })
+                .handleFormSubmit(formData);
+        }
+        
+        // Инициализация обработчиков форм
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('feedback-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleFormSubmit('feedback-form');
+            });
+            
+            document.getElementById('modal-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleFormSubmit('modal-form');
+            });
+        });
+    </script>
+</body>
+</html>
