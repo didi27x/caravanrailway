@@ -398,8 +398,24 @@
             text-decoration: none !important;
         }
         
+        /* Улучшенные стили формы */
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
         .form-group {
             margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
         }
         
         .form-control {
@@ -408,6 +424,50 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-control.error {
+            border-color: #e74c3c;
+            background-color: #ffeaea;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            background: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         textarea.form-control {
@@ -488,6 +548,8 @@
             border-radius: 10px;
             position: relative;
             padding: 40px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .close-modal {
@@ -497,6 +559,11 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #777;
+            transition: 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
         }
         
         /* Мобильное меню */
@@ -587,6 +654,10 @@
             .services-grid,
             .advantages-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .contact-form {
+                padding: 20px;
             }
         }
         
@@ -780,7 +851,7 @@
 
     <!-- Герой секция -->
     <section class="hero">
-        <img src="https://images.pexels.com/photos/31285311/pexels-photo-31285311.jpeg?_gl=1*101xg5b*_ga*MTcyMzIxNzY0Ni4xNzUwOTI3NDE2*_ga_8JE65Q40S6*czE3NTA5Mjc0MTYkbzEkZzEkdDE3NTA5MjgwNzYkajQwJGwwJGhw" alt="Грузовой поезд" class="hero-bg">
+        <img src="https://images.pexels.com/photos/31285311/pexels-photo-31285311.jpeg?_gl=1*101xg5b*_ga*MTcyMzIxNzY0Ni4xNzUwOTI3NDE2*_ga_8JE65Q40S6*czE3NTA5Mjc0MTYkbzEkZzEkdDE3NTA5MjgwNzYkajQ0JGwwJGhw" alt="Грузовой поезд" class="hero-bg">
         <div class="hero-content">
             <h1>Железнодорожные перевозки по Узбекистану и СНГ</h1>
             <p>Полный комплекс транспортно-экспедиторских услуг по железнодорожным перевозкам</p>
@@ -970,20 +1041,45 @@
             
             <div class="contact-form">
                 <h3>Отправить запрос</h3>
+                <div class="success-message" id="success-message">
+                    <i class="fas fa-check-circle"></i> Сообщение успешно отправлено!
+                </div>
+                
                 <form id="feedback-form">
                     <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                        <label class="form-label">Ваше имя *</label>
+                        <input type="text" name="name" class="form-control" placeholder="Иван Иванов" required>
+                        <div class="error-message" id="name-error">Пожалуйста, введите ваше имя</div>
                     </div>
+                    
                     <div class="form-group">
-                        <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
+                        <label class="form-label">Ваш телефон *</label>
+                        <input type="tel" name="phone" class="form-control" placeholder="+998 90 123 45 67" required>
+                        <div class="error-message" id="phone-error">Введите корректный номер телефона</div>
                     </div>
+                    
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
+                        <label class="form-label">Ваш Email *</label>
+                        <input type="email" name="email" class="form-control" placeholder="ivan@example.com" required>
+                        <div class="error-message" id="email-error">Введите корректный email адрес</div>
                     </div>
+                    
                     <div class="form-group">
-                        <textarea name="message" class="form-control" placeholder="Сообщение" required></textarea>
+                        <label class="form-label">Сообщение *</label>
+                        <textarea name="message" class="form-control" placeholder="Опишите ваш груз, маршрут и другие детали..." required></textarea>
+                        <div class="error-message" id="message-error">Пожалуйста, напишите сообщение</div>
                     </div>
-                    <button type="submit" class="btn btn-block">Отправить запрос</button>
+                    
+                    <input type="hidden" name="source" value="Основная форма">
+                    
+                    <button type="submit" class="btn btn-block" id="submit-btn">
+                        <span id="btn-text">Отправить запрос</span>
+                        <div class="loading-spinner" id="loading-spinner" style="display: none;"></div>
+                    </button>
+                    
+                    <div style="margin-top: 15px; font-size: 0.85rem; color: #666;">
+                        <i class="fas fa-info-circle"></i> Мы свяжемся с вами в течение 30 минут
+                    </div>
                 </form>
             </div>
         </div>
@@ -1038,20 +1134,45 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2>Запрос на консультацию</h2>
+            <div class="success-message" id="modal-success-message">
+                <i class="fas fa-check-circle"></i> Сообщение успешно отправлено!
+            </div>
+            
             <form id="modal-form">
                 <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                    <label class="form-label">Ваше имя *</label>
+                    <input type="text" name="name" class="form-control" placeholder="Иван Иванов" required>
+                    <div class="error-message" id="modal-name-error">Пожалуйста, введите ваше имя</div>
                 </div>
+                
                 <div class="form-group">
-                    <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
+                    <label class="form-label">Ваш телефон *</label>
+                    <input type="tel" name="phone" class="form-control" placeholder="+998 90 123 45 67" required>
+                    <div class="error-message" id="modal-phone-error">Введите корректный номер телефона</div>
                 </div>
+                
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
+                    <label class="form-label">Ваш Email *</label>
+                    <input type="email" name="email" class="form-control" placeholder="ivan@example.com" required>
+                    <div class="error-message" id="modal-email-error">Введите корректный email адрес</div>
                 </div>
+                
                 <div class="form-group">
-                    <textarea name="message" class="form-control" placeholder="Сообщение" required></textarea>
+                    <label class="form-label">Сообщение *</label>
+                    <textarea name="message" class="form-control" placeholder="Опишите ваш груз, маршрут и другие детали..." required></textarea>
+                    <div class="error-message" id="modal-message-error">Пожалуйста, напишите сообщение</div>
                 </div>
-                <button type="submit" class="btn btn-block">Отправить запрос</button>
+                
+                <input type="hidden" name="source" value="Модальная форма">
+                
+                <button type="submit" class="btn btn-block" id="modal-submit-btn">
+                    <span id="modal-btn-text">Отправить запрос</span>
+                    <div class="loading-spinner" id="modal-loading-spinner" style="display: none;"></div>
+                </button>
+                
+                <div style="margin-top: 15px; font-size: 0.85rem; color: #666;">
+                    <i class="fas fa-info-circle"></i> Мы свяжемся с вами в течение 30 минут
+                </div>
             </form>
         </div>
     </div>
@@ -1122,61 +1243,176 @@
             });
         });
         
+        // Валидация формы
+        function validateForm(form) {
+            let isValid = true;
+            
+            // Сброс предыдущих ошибок
+            form.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+            form.querySelectorAll('.form-control').forEach(el => el.classList.remove('error'));
+            
+            // Валидация имени
+            const nameInput = form.querySelector('[name="name"]');
+            if (!nameInput.value.trim()) {
+                const errorEl = form.querySelector('#name-error') || form.querySelector('#modal-name-error');
+                errorEl.style.display = 'block';
+                nameInput.classList.add('error');
+                isValid = false;
+            }
+            
+            // Валидация телефона
+            const phoneInput = form.querySelector('[name="phone"]');
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            if (!phoneInput.value.trim() || !phoneRegex.test(phoneInput.value)) {
+                const errorEl = form.querySelector('#phone-error') || form.querySelector('#modal-phone-error');
+                errorEl.style.display = 'block';
+                phoneInput.classList.add('error');
+                isValid = false;
+            }
+            
+            // Валидация email
+            const emailInput = form.querySelector('[name="email"]');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput.value.trim() || !emailRegex.test(emailInput.value)) {
+                const errorEl = form.querySelector('#email-error') || form.querySelector('#modal-email-error');
+                errorEl.style.display = 'block';
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+            
+            // Валидация сообщения
+            const messageInput = form.querySelector('[name="message"]');
+            if (!messageInput.value.trim()) {
+                const errorEl = form.querySelector('#message-error') || form.querySelector('#modal-message-error');
+                errorEl.style.display = 'block';
+                messageInput.classList.add('error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
         // Обработка отправки форм
         function handleFormSubmit(formId) {
             const form = document.getElementById(formId);
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
             
-            // Получаем значения полей
-            const formData = {
-                name: form.querySelector('[name="name"]').value,
-                phone: form.querySelector('[name="phone"]').value,
-                email: form.querySelector('[name="email"]').value,
-                message: form.querySelector('[name="message"]').value
-            };
+            if (!validateForm(form)) {
+                return false;
+            }
+            
+            const submitButton = form.querySelector('button[type="submit"]');
+            const btnText = submitButton.querySelector('#btn-text') || submitButton.querySelector('#modal-btn-text');
+            const spinner = submitButton.querySelector('#loading-spinner') || submitButton.querySelector('#modal-loading-spinner');
+            const successMessage = document.getElementById(formId === 'feedback-form' ? 'success-message' : 'modal-success-message');
             
             // Показать состояние загрузки
-            submitButton.innerHTML = 'Отправка...';
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
             submitButton.disabled = true;
+            
+            // Собрать данные формы
+            const formData = {
+                name: form.querySelector('[name="name"]').value.trim(),
+                phone: form.querySelector('[name="phone"]').value.trim(),
+                email: form.querySelector('[name="email"]').value.trim(),
+                message: form.querySelector('[name="message"]').value.trim(),
+                source: form.querySelector('[name="source"]').value
+            };
+            
+            console.log("Отправка данных:", formData);
             
             // Вызов серверной функции Google Apps Script
             google.script.run
                 .withSuccessHandler((response) => {
-                    if (response.status === "success") {
-                        alert(response.message);
-                        form.reset();
-                        if (formId === 'modal-form') {
-                            modal.style.display = 'none';
-                            document.body.style.overflow = 'auto';
-                        }
-                    } else {
-                        alert('Ошибка: ' + response.message);
-                    }
-                    submitButton.innerHTML = originalButtonText;
+                    console.log("Ответ от сервера:", response);
+                    
+                    // Скрыть спиннер
+                    btnText.style.display = 'inline';
+                    spinner.style.display = 'none';
                     submitButton.disabled = false;
+                    
+                    if (response.status === "success") {
+                        // Показать сообщение об успехе
+                        successMessage.style.display = 'block';
+                        form.reset();
+                        
+                        // Автоматически скрыть сообщение через 5 секунд
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                        
+                        // Закрыть модальное окно, если это модальная форма
+                        if (formId === 'modal-form') {
+                            setTimeout(() => {
+                                modal.style.display = 'none';
+                                document.body.style.overflow = 'auto';
+                            }, 2000);
+                        }
+                        
+                        // Прокрутить к сообщению об успехе
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        
+                    } else {
+                        alert('❌ ' + response.message);
+                    }
                 })
                 .withFailureHandler((error) => {
                     console.error('Ошибка отправки:', error);
-                    alert('Ошибка отправки. Пожалуйста, попробуйте снова или свяжитесь по телефону.');
-                    submitButton.innerHTML = originalButtonText;
+                    
+                    // Скрыть спиннер
+                    btnText.style.display = 'inline';
+                    spinner.style.display = 'none';
                     submitButton.disabled = false;
+                    
+                    alert('⚠️ Ошибка соединения. Пожалуйста, позвоните нам: +998 33 419 0878');
                 })
                 .handleFormSubmit(formData);
+            
+            return false;
         }
         
         // Инициализация обработчиков форм
         document.addEventListener('DOMContentLoaded', () => {
+            // Основная форма
             document.getElementById('feedback-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 handleFormSubmit('feedback-form');
             });
             
+            // Модальная форма
             document.getElementById('modal-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 handleFormSubmit('modal-form');
             });
+            
+            // Валидация в реальном времени
+            document.querySelectorAll('.form-control').forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.value.trim()) {
+                        this.classList.remove('error');
+                        const errorId = this.name + '-error';
+                        const modalErrorId = 'modal-' + errorId;
+                        const errorEl = document.getElementById(errorId) || document.getElementById(modalErrorId);
+                        if (errorEl) errorEl.style.display = 'none';
+                    }
+                });
+            });
         });
+        
+        // Тестовая функция для проверки подключения
+        function testConnection() {
+            console.log("Тестирование подключения...");
+            google.script.run
+                .withSuccessHandler((response) => {
+                    console.log("Результат теста:", response);
+                    alert(response);
+                })
+                .withFailureHandler((error) => {
+                    console.error("Ошибка теста:", error);
+                    alert("❌ Ошибка подключения: " + error.toString());
+                })
+                .testConnection();
+        }
     </script>
 </body>
 </html>
