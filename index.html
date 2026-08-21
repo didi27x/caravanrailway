@@ -1507,6 +1507,41 @@ document.addEventListener('DOMContentLoaded', function() {
   setLang(savedLang);
 });
 </script>
+    
+    <!-- ya metrika -->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const counterId = 111830297;
 
+    // 1. Отслеживание кликов по телефону
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') {
+                ym(counterId, 'reachGoal', 'phone_click');
+            }
+        });
+    });
+
+    // 2. Отслеживание кликов по Email
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+        link.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') {
+                ym(counterId, 'reachGoal', 'email_click');
+            }
+        });
+    });
+
+    // 3. Отслеживание отправки формы
+    // Замените 'yourFormId' на реальный ID вашей формы, если он есть, 
+    // или оставьте так, чтобы отлавливать отправку любой формы на странице
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function() {
+            if (typeof ym !== 'undefined') {
+                ym(counterId, 'reachGoal', 'form_submit');
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
