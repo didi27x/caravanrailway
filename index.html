@@ -1446,5 +1446,23 @@
                 .testConnection();
         }
     </script>
+    <!-- переключатель языка -->
+    <script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-ru').forEach(function(el) {
+    el.style.display = (lang === 'ru') ? '' : 'none';
+  });
+  document.querySelectorAll('.lang-en').forEach(function(el) {
+    el.style.display = (lang === 'en') ? '' : 'none';
+  });
+  localStorage.setItem('site-lang', lang);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var savedLang = localStorage.getItem('site-lang') || 'ru';
+  setLang(savedLang);
+});
+</script>
+    
 </body>
 </html>
